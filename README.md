@@ -18,7 +18,7 @@ Users can dynamically change the initial values and parameters to get randomly g
 -   Frontend: React, Next.js, Material UI, styled-components
 -   Backend: A simple server for generating random data based on selected parameters
 -   Libraries: faker, papaparse
--   Deploy the applicationt: Vercel []
+-   Deploy the applicationt: Vercel [https://book-store-app-cyan.vercel.app/]
 
 ---
 
@@ -42,7 +42,7 @@ Users can dynamically change the initial values and parameters to get randomly g
 -   Frontend: React, Next.js, Material UI, styled-components
 -   Backend: Простой сервер для генерации случайных данных на основе выбранных параметров
 -   Библиотеки: faker, papaparse
--   Деплой приложения: Vercel []
+-   Деплой приложения: Vercel [https://book-store-app-cyan.vercel.app/]
 
 ---
 
