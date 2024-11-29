@@ -17,6 +17,7 @@ import {
 import { Shuffle, ViewList, ViewModule, FilterList } from "@mui/icons-material";
 import { StickyToolbar } from "./toolbar.styled";
 import { ToolbarProps as CustomToolbarProps } from "@/types/components/toolbar.type";
+import ExportCsvButton from "@/components/ExportCsvButton";
 
 const languages = [
     { value: "en", label: "English" },
@@ -32,10 +33,11 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
     onSeedChange,
     likes,
     onLikesChange,
-    reviews,
-    onReviewsChange,
+    rating,
+    onRatingChange,
     view,
     onViewChange,
+    books,
 }) => {
     const [isDrawerOpen, setDrawerOpen] = useState(false);
 
@@ -102,10 +104,10 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
             <TextField
                 sx={{ width: { xs: "100%", md: "20%" } }}
                 id="number-input-field"
-                label="Reviews"
+                label="Rating"
                 type="number"
-                value={reviews}
-                onChange={(e) => onReviewsChange(Number(e.target.value))}
+                value={rating}
+                onChange={(e) => onRatingChange(Number(e.target.value))}
                 slotProps={{
                     input: {
                         inputProps: {
@@ -122,13 +124,14 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
 
     return (
         <StickyToolbar>
-            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <Box sx={{ display: { xs: "flex", md: "none" }, gap: 5 }}>
                 <Button
                     variant="outlined"
                     startIcon={<FilterList />}
                     onClick={handleDrawerToggle}>
                     Filters
                 </Button>
+                <ExportCsvButton books={books} />
             </Box>
 
             <Box
@@ -150,6 +153,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
                         <ViewModule />
                     </ToggleButton>
                 </ToggleButtonGroup>
+                <ExportCsvButton books={books} />
             </Box>
 
             <Drawer

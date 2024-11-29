@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
             Math.max(1, Number(searchParams.get("pageSize")) || 20)
         );
         const targetLikes = Number(searchParams.get("averageLikes") || 3.7);
-        const targetRating = Number(searchParams.get("averageReviews") || 4.7);
+        const targetRating = Number(searchParams.get("averageRating") || 4.7);
 
         const config = localeConfigs[region as keyof typeof localeConfigs];
         if (!config) {

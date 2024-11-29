@@ -26,7 +26,7 @@ const headers: Header[] = [
     { label: "Author", align: "left" },
     { label: "Publisher", align: "left" },
     { label: "Likes", align: "center" },
-    { label: "Reviews", align: "center" },
+    { label: "Rating", align: "center" },
 ];
 
 interface ExtendedBooksProps extends BooksProps {

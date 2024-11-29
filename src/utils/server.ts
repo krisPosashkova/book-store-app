@@ -44,6 +44,20 @@ export function generateReviews(
 
 export function generateBook(index: number, localFaker: Faker): Book {
     const combinedSeed = localFaker.commerce.isbn();
+    const reviews = generateReviews(
+        Number(localFaker.number.float({ min: 0, max: 10 }).toFixed(1)),
+        localFaker
+    );
+
+    const averageRating =
+        reviews.length > 0
+            ? Number(
+                  (
+                      reviews.reduce((sum, review) => sum + review.rating, 0) /
+                      reviews.length
+                  ).toFixed(1)
+              )
+            : 0.0;
 
     return {
         index,
@@ -53,10 +67,8 @@ export function generateBook(index: number, localFaker: Faker): Book {
         author: localFaker.book.author(),
         publisher: localFaker.book.publisher(),
         likes: Number(localFaker.number.float({ min: 0, max: 10 }).toFixed(1)),
-        reviews: generateReviews(
-            Number(localFaker.number.float({ min: 0, max: 10 }).toFixed(1)),
-            localFaker
-        ),
+        rating: averageRating,
+        reviews,
         coverImage: `${URL_IMAGE_FIKER}/seed/${combinedSeed}/400/300/`,
     };
 }

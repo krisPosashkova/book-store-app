@@ -8,7 +8,7 @@ export const useBooks = () => {
     const [language, setLanguage] = useState<string>("en");
     const [seed, setSeed] = useState<number>(13562);
     const [likes, setLikes] = useState<number>(3.7);
-    const [reviews, setReviews] = useState<number>(4.7);
+    const [rating, setRating] = useState<number>(4.7);
     const [view, setView] = useState<View>("list");
     const [books, setBooks] = useState<Book[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -31,7 +31,7 @@ export const useBooks = () => {
                 page: String(page),
                 pageSize: "20",
                 averageLikes: String(likes),
-                averageReviews: String(reviews),
+                averageRating: String(rating),
             });
 
             setError(null);
@@ -61,7 +61,7 @@ export const useBooks = () => {
                 setIsLoading(false);
             }
         }, 500),
-        [language, seed, likes, reviews, hasMore]
+        [language, seed, likes, rating, hasMore]
     );
 
     const loadMore = useCallback(() => {
@@ -74,7 +74,7 @@ export const useBooks = () => {
         setCurrentPage(1);
         setHasMore(true);
         fetchBooks(1, true);
-    }, [language, seed, likes, reviews]);
+    }, [language, seed, likes, rating]);
 
     useEffect(() => {
         if (currentPage > 1) {
@@ -89,8 +89,8 @@ export const useBooks = () => {
         setSeed,
         likes,
         setLikes,
-        reviews,
-        setReviews,
+        rating,
+        setRating,
         view,
         setView,
         generateRandomSeed,

@@ -14,6 +14,7 @@ export interface Book {
     reviews: Review[];
     genre: string;
     coverImage: string;
+    rating: number;
 }
 
 export interface BookItemProps {

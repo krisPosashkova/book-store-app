@@ -30,16 +30,7 @@ export function Row({ item }: BookItemProps) {
                 <TableCell>{item.author}</TableCell>
                 <TableCell>{item.publisher}</TableCell>
                 <TableCell align="center">{item.likes}</TableCell>
-                <TableCell align="center">
-                    {item.reviews.length > 0
-                        ? (
-                              item.reviews.reduce(
-                                  (sum, review) => sum + review.rating,
-                                  0
-                              ) / item.reviews.length
-                          ).toFixed(1)
-                        : 0}
-                </TableCell>
+                <TableCell align="center">{item.rating}</TableCell>
             </TableRow>
 
             <TableRow>

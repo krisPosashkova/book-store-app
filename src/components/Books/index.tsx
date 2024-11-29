@@ -15,8 +15,8 @@ const Books = () => {
         setSeed,
         likes,
         setLikes,
-        reviews,
-        setReviews,
+        rating,
+        setRating,
         view,
         setView,
         generateRandomSeed,
@@ -39,11 +39,12 @@ const Books = () => {
                     onSeedChange={setSeed}
                     likes={likes}
                     onLikesChange={setLikes}
-                    reviews={reviews}
-                    onReviewsChange={setReviews}
+                    rating={rating}
+                    onRatingChange={setRating}
                     view={view}
                     onViewChange={setView}
                     generateRandomSeed={generateRandomSeed}
+                    books={books}
                 />
 
                 {error ? (
