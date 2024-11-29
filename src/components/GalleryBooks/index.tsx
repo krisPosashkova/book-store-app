@@ -7,14 +7,9 @@ import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 interface GalleryBooksProps {
     books: Book[];
     onLoadMore: () => void;
-    isLoading: boolean;
 }
 
-const GalleryBooks: React.FC<GalleryBooksProps> = ({
-    books,
-    onLoadMore,
-    isLoading,
-}) => {
+const GalleryBooks: React.FC<GalleryBooksProps> = ({ books, onLoadMore }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     useInfiniteScroll(onLoadMore, containerRef);
 
@@ -30,22 +25,12 @@ const GalleryBooks: React.FC<GalleryBooksProps> = ({
                 spacing={2}
                 sx={{
                     pt: 5,
-                    pb: 5,
+                    pb: "100px",
                 }}>
                 {books.map((book) => (
                     <CardBook key={book.index} book={book} />
                 ))}
             </Grid2>
-            {isLoading && (
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        p: 2,
-                    }}>
-                    <CircularProgress />
-                </Box>
-            )}
         </Box>
     );
 };

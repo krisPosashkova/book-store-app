@@ -35,7 +35,6 @@ export const useBooks = () => {
             });
 
             setError(null);
-            setIsLoading(true);
 
             try {
                 const response = await fetch(
@@ -73,11 +72,13 @@ export const useBooks = () => {
     useEffect(() => {
         setCurrentPage(1);
         setHasMore(true);
+        setIsLoading(true);
         fetchBooks(1, true);
     }, [language, seed, likes, rating]);
 
     useEffect(() => {
         if (currentPage > 1) {
+            setIsLoading(true);
             fetchBooks(currentPage);
         }
     }, [currentPage]);

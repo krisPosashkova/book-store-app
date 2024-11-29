@@ -1,6 +1,12 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
-import { Box, useTheme, useMediaQuery, Typography } from "@mui/material";
+import React from "react";
+import {
+    Box,
+    useTheme,
+    useMediaQuery,
+    Typography,
+    CircularProgress,
+} from "@mui/material";
 import { Container } from "@mui/system";
 import CustomToolbar from "@/components/CustomToolbar";
 import GalleryBooks from "@/components/GalleryBooks";
@@ -30,7 +36,7 @@ const Books = () => {
         theme.breakpoints.between("xs", "md")
     );
     return (
-        <Box sx={{ width: "100%", overflow: "hidden" }}>
+        <Box sx={{ width: "100%", overflow: "hidden", position: "relative" }}>
             <Container maxWidth="xl">
                 <CustomToolbar
                     language={language}
@@ -60,17 +66,22 @@ const Books = () => {
                         </Typography>
                     </Box>
                 ) : view === "list" && !isMobileOrTablet ? (
-                    <TableBook
-                        books={books}
-                        onLoadMore={loadMore}
-                        isLoading={isLoading}
-                    />
+                    <TableBook books={books} onLoadMore={loadMore} />
                 ) : (
-                    <GalleryBooks
-                        books={books}
-                        onLoadMore={loadMore}
-                        isLoading={isLoading}
-                    />
+                    <GalleryBooks books={books} onLoadMore={loadMore} />
+                )}
+
+                {isLoading && (
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            bottom: 16,
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            zIndex: 2,
+                        }}>
+                        <CircularProgress />
+                    </Box>
                 )}
             </Container>
         </Box>

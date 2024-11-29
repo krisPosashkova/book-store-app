@@ -51,7 +51,7 @@ const TableBook: React.FC<ExtendedBooksProps> = ({
             <Table
                 stickyHeader
                 aria-label="sticky table"
-                sx={{ tableLayout: "fixed" }}>
+                sx={{ tableLayout: "fixed", pb: "100px" }}>
                 <TableHead>
                     <TableRow>
                         <TableCell width="10%" />

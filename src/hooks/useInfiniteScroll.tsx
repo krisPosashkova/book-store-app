@@ -9,7 +9,7 @@ export function useInfiniteScroll(
         if (!container) return;
 
         const { scrollTop, scrollHeight, clientHeight } = container;
-        if (scrollHeight - scrollTop - clientHeight < scrollHeight * 0.2) {
+        if (scrollHeight - scrollTop - clientHeight < scrollHeight * 0.05) {
             onLoadMore();
         }
     }, [onLoadMore]);
