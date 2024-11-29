@@ -21,7 +21,6 @@ const getBooks = async (
 ) => {
     try {
         if (isNewQuery) {
-            console.log("isNewQuery");
             callbacks.setBooks([]);
         }
 
@@ -43,16 +42,13 @@ const getBooks = async (
 
             if (isNewQuery) {
                 callbacks.setBooks(data.books);
-                console.log("isNewQuery books");
             } else {
                 callbacks.setBooks((prevBooks) => [
                     ...prevBooks,
                     ...data.books,
                 ]);
-                console.log("not isNewQuery books");
             }
 
-            console.log(data.books, "books");
             callbacks.setHasMore(data.books.length === 20);
         } else {
             callbacks.setError(MESSAGES.FAILED_TO_GENERATE_BOOKS);
