@@ -26,8 +26,8 @@ export async function GET(request: NextRequest) {
             100,
             Math.max(1, Number(searchParams.get("pageSize")) || 20)
         );
-        const targetLikes = Number(searchParams.get("averageLikes") || 3.7);
-        const targetRating = Number(searchParams.get("averageRating") || 4.7);
+        const targetLikes = Number(searchParams.get("averageLikes") || 4.7);
+        const targetRating = Number(searchParams.get("averageRating") || 3.7);
 
         const config = localeConfigs[region as keyof typeof localeConfigs];
         if (!config) {
@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
             ) {
                 matchingBooks.push(book);
             }
-            if (attempts % 20 === 0 && matchingBooks.length < pageSize / 2) {
+            if (attempts % 100 === 0 && matchingBooks.length < pageSize / 2) {
                 currentTolerance = Math.min(
                     currentTolerance + TOLERANCE_STEP,
                     MAX_TOLERANCE

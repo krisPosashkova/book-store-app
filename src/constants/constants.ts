@@ -1,4 +1,4 @@
-export const MAX_ATTEMPTS = 300;
+export const MAX_ATTEMPTS = 400;
 export const URL_IMAGE_FIKER = "https://picsum.photos";
 
 export const BASE_TOLERANCE = 1;

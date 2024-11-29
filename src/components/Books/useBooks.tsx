@@ -67,8 +67,8 @@ const getBooks = async (
 export const useBooks = () => {
     const [language, setLanguage] = useState<string>("en");
     const [seed, setSeed] = useState<number>(13562);
-    const [likes, setLikes] = useState<number>(3.7);
-    const [rating, setRating] = useState<number>(4.7);
+    const [likes, setLikes] = useState<number>(4.7);
+    const [rating, setRating] = useState<number>(3.7);
     const [view, setView] = useState<View>("list");
     const [books, setBooks] = useState<Book[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
