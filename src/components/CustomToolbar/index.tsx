@@ -101,24 +101,25 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
                 />
             </FormControl>
 
-            <TextField
-                sx={{ width: { xs: "100%", md: "20%" } }}
-                id="number-input-field"
-                label="Rating"
-                type="number"
-                value={rating}
-                onChange={(e) => onRatingChange(Number(e.target.value))}
-                slotProps={{
-                    input: {
-                        inputProps: {
-                            step: 0.1,
-                            min: 0,
-                            max: 5,
-                        },
-                    },
-                }}
-                variant="outlined"
-            />
+            <FormControl
+                variant="filled"
+                sx={{ width: { xs: "100%", md: "20%" } }}>
+                <Typography id="slider-label-rating" gutterBottom>
+                    Rating
+                </Typography>
+                <Slider
+                    aria-labelledby="slider-label-rating"
+                    value={rating}
+                    min={0}
+                    max={5}
+                    step={0.1}
+                    onChange={(_, newValue) =>
+                        onRatingChange(newValue as number)
+                    }
+                    valueLabelDisplay="auto"
+                    valueLabelFormat={(value) => value.toFixed(1)}
+                />
+            </FormControl>
         </>
     );
 
