@@ -3,6 +3,7 @@ import { Book, Review } from "@/types/books.type";
 import { BookAverages } from "@/types/books.type";
 
 import { URL_IMAGE_FIKER } from "@/constants/constants";
+import crypto from "crypto";
 
 export const localeConfigs = {
     en: {
@@ -49,6 +50,14 @@ export function generateBook(index: number, localFaker: Faker): Book {
         localFaker
     );
 
+    const isbn = localFaker.commerce.isbn();
+    const title = localFaker.book.title();
+
+    const id = crypto
+        .createHash("md5")
+        .update(`${index}-${isbn}-${title}`)
+        .digest("hex");
+
     const averageRating =
         reviews.length > 0
             ? Number(
@@ -61,8 +70,9 @@ export function generateBook(index: number, localFaker: Faker): Book {
 
     return {
         index,
-        isbn: localFaker.commerce.isbn(),
-        title: localFaker.book.title(),
+        id,
+        isbn,
+        title,
         genre: localFaker.book.genre(),
         author: localFaker.book.author(),
         publisher: localFaker.book.publisher(),

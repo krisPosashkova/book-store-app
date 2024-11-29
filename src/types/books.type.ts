@@ -6,6 +6,7 @@ export interface Review {
 
 export interface Book {
     index: number;
+    id?: string;
     isbn: string;
     title: string;
     author: string;

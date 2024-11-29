@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Grid2, Box, CircularProgress } from "@mui/material";
+import { Grid2, Box } from "@mui/material";
 import { Book } from "@/types/books.type";
 import CardBook from "./CardBook";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
@@ -27,8 +27,8 @@ const GalleryBooks: React.FC<GalleryBooksProps> = ({ books, onLoadMore }) => {
                     pt: 5,
                     pb: "100px",
                 }}>
-                {books.map((book) => (
-                    <CardBook key={book.index} book={book} />
+                {books.map((book, index) => (
+                    <CardBook key={`${book.id}-${index}`} book={book} />
                 ))}
             </Grid2>
         </Box>

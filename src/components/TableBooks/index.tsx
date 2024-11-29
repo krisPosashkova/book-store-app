@@ -31,14 +31,9 @@ const headers: Header[] = [
 
 interface ExtendedBooksProps extends BooksProps {
     onLoadMore: () => void;
-    isLoading: boolean;
 }
 
-const TableBook: React.FC<ExtendedBooksProps> = ({
-    books,
-    onLoadMore,
-    isLoading,
-}) => {
+const TableBook: React.FC<ExtendedBooksProps> = ({ books, onLoadMore }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     useInfiniteScroll(onLoadMore, containerRef);
     return (
@@ -69,8 +64,8 @@ const TableBook: React.FC<ExtendedBooksProps> = ({
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {books.map((book) => (
-                        <Row key={book.index} item={book} />
+                    {books.map((book, index) => (
+                        <Row key={`${book.id}-${index}`} item={book} />
                     ))}
                 </TableBody>
             </Table>
