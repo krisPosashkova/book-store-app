@@ -1,4 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bookstore: Random Book Generator
+
+Users can dynamically change the initial values and parameters to get randomly generated data about books, including their title, authors, publishers, ISBN, as well as the number of likes and reviews. The data is updated automatically when settings are changed, and the table supports endless scrolling for user convenience.
+
+### Main functions:
+
+-   Language and Region selection: The user can select one of three languages and regions to generate data corresponding to the selected localization.
+-   Random Data: The user can enter a seed to generate random data for each book, including ISBN, title, authors and publisher.
+-   Average number of likes and reviews: Sliders to adjust the average number of likes and reviews for a book, with the ability to specify fractional values.
+-   Endless scrolling: The application supports endless scrolling, automatically loading new data as the page scrolls.
+-   Detailed information: When you click on a book, additional information is displayed, such as the cover image and review texts.
+-   Data consistency: Using random numbers with an initial value that keeps the results unchanged when the same value is entered again.
+-   Export to CSV: The ability to export current data in CSV format for future use.
+-   Alternative view: Support for a gallery view of the data display.
+
+### Technology stack:
+
+-   Frontend: React, Next.js, Material UI, styled-components
+-   Backend: A simple server for generating random data based on selected parameters
+-   Libraries: faker, papaparse
+-   Deploy the applicationt: Vercel []
+
+---
+
+# Книжный Магазин: Генератор Случайных Книг
+
+Пользователи могут динамически изменять начальные значения и параметры, чтобы получить случайно сгенерированные данные о книгах, включая их название, авторов, издателей, ISBN, а также количество лайков и отзывов. Данные обновляются автоматически при изменении настроек, и таблица поддерживает бесконечную прокрутку для удобства пользователя.
+
+### Основные функции:
+
+-   Выбор языка и региона: Пользователь может выбрать один из трех языков и регионов, чтобы генерировать данные, соответствующие выбранной локализации.
+-   Случайные данные: Пользователь может ввести seed для генерации случайных данных для каждой книги, включая ISBN, название, авторов и издателя.
+-   Среднее количество лайков и отзывов: Ползунки для регулирования среднего количества лайков и отзывов на книгу, с возможностью указания дробных значений.
+-   Бесконечная прокрутка: Приложение поддерживает бесконечную прокрутку, автоматически подгружая новые данные по мере прокрутки страницы.
+-   Детальная информация: При нажатии на книгу отображаются дополнительные сведения, такие как изображение обложки и тексты рецензий.
+-   Постоянство данных: Использование случайных чисел с начальным значением, которое сохраняет результаты неизменными при повторном вводе того же значения.
+-   Экспорт в CSV: Возможность экспорта текущих данных в CSV-формате для дальнейшего использования.
+-   Альтернативный просмотр: Поддержка галерейного вида отображения данных.
+
+### Стек технологий:
+
+-   Frontend: React, Next.js, Material UI, styled-components
+-   Backend: Простой сервер для генерации случайных данных на основе выбранных параметров
+-   Библиотеки: faker, papaparse
+-   Деплой приложения: Vercel []
+
+---
 
 ## Getting Started
 
@@ -13,24 +59,3 @@ pnpm dev
 # or
 bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
