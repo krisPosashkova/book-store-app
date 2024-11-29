@@ -19,7 +19,6 @@ export default createGlobalStyle`
     }
 
     body {
-        overflow-y: auto;
         background-color: ${({ theme }) => theme.palette.background.default};
         font-family: var(--font-primary), sans-serif;
         font-size: clamp(1rem, 1.5vw + 0.5rem, 1.5rem);
