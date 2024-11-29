@@ -1,8 +1,68 @@
 import { useState, useEffect, useCallback } from "react";
-import debounce from "lodash.debounce";
 import { Book } from "@/types/books.type";
 import { MESSAGES } from "@/constants/messages";
 import { View } from "@/types/components/toolbar.type";
+
+const getBooks = async (
+    page: number,
+    isNewQuery: boolean,
+    options: {
+        language: string;
+        seed: number;
+        likes: number;
+        rating: number;
+    },
+    callbacks: {
+        setBooks: (books: Book[] | ((prevBooks: Book[]) => Book[])) => void;
+        setHasMore: (hasMore: boolean) => void;
+        setError: (error: string | null) => void;
+        setIsLoading: (loading: boolean) => void;
+    }
+) => {
+    try {
+        if (isNewQuery) {
+            console.log("isNewQuery");
+            callbacks.setBooks([]);
+        }
+
+        const queryParams = new URLSearchParams({
+            region: options.language,
+            seed: String(options.seed),
+            page: String(page),
+            pageSize: "20",
+            averageLikes: String(options.likes),
+            averageRating: String(options.rating),
+        });
+
+        callbacks.setError(null);
+
+        const response = await fetch(`/api/books?${queryParams.toString()}`);
+
+        if (response.ok) {
+            const data = await response.json();
+
+            if (isNewQuery) {
+                callbacks.setBooks(data.books);
+                console.log("isNewQuery books");
+            } else {
+                callbacks.setBooks((prevBooks) => [
+                    ...prevBooks,
+                    ...data.books,
+                ]);
+                console.log("not isNewQuery books");
+            }
+
+            console.log(data.books, "books");
+            callbacks.setHasMore(data.books.length === 20);
+        } else {
+            callbacks.setError(MESSAGES.FAILED_TO_GENERATE_BOOKS);
+        }
+    } catch (error) {
+        callbacks.setError(`Error fetching data: ${(error as Error).message}`);
+    } finally {
+        callbacks.setIsLoading(false);
+    }
+};
 
 export const useBooks = () => {
     const [language, setLanguage] = useState<string>("en");
@@ -16,50 +76,23 @@ export const useBooks = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
 
-    const generateRandomSeed = () => {
+    const generateRandomSeed = useCallback(() => {
         const randomSeed = Math.floor(Math.random() * 1000000);
         setSeed(randomSeed);
-    };
+    }, []);
 
     const fetchBooks = useCallback(
-        debounce(async (page: number, isNewQuery: boolean = false) => {
+        (page: number, isNewQuery: boolean = false) => {
             if (!hasMore && !isNewQuery) return;
 
-            const queryParams = new URLSearchParams({
-                region: language,
-                seed: String(seed),
-                page: String(page),
-                pageSize: "20",
-                averageLikes: String(likes),
-                averageRating: String(rating),
-            });
-
-            setError(null);
-
-            try {
-                const response = await fetch(
-                    `/api/books?${queryParams.toString()}`
-                );
-
-                if (response.ok) {
-                    const data = await response.json();
-
-                    if (isNewQuery) {
-                        setBooks(data.books);
-                    } else {
-                        setBooks((prevBooks) => [...prevBooks, ...data.books]);
-                    }
-
-                    setHasMore(data.books.length === 20);
-                } else {
-                    setError(MESSAGES.FAILED_TO_GENERATE_BOOKS);
-                }
-            } catch (error) {
-                setError(`Error fetching data: ${(error as Error).message}`);
-            } finally {
-                setIsLoading(false);
-            }
-        }, 500),
+            setIsLoading(true);
+            getBooks(
+                page,
+                isNewQuery,
+                { language, seed, likes, rating },
+                { setBooks, setHasMore, setError, setIsLoading }
+            );
+        },
         [language, seed, likes, rating, hasMore]
     );
 
@@ -72,16 +105,14 @@ export const useBooks = () => {
     useEffect(() => {
         setCurrentPage(1);
         setHasMore(true);
-        setIsLoading(true);
         fetchBooks(1, true);
-    }, [language, seed, likes, rating]);
+    }, [language, seed, likes, rating, fetchBooks]);
 
     useEffect(() => {
         if (currentPage > 1) {
-            setIsLoading(true);
             fetchBooks(currentPage);
         }
-    }, [currentPage]);
+    }, [currentPage, fetchBooks]);
 
     return {
         language,
@@ -99,5 +130,6 @@ export const useBooks = () => {
         error,
         isLoading,
         loadMore,
+        hasMore,
     };
 };
