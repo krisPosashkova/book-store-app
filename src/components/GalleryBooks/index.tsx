@@ -19,6 +19,7 @@ const GalleryBooks: React.FC<GalleryBooksProps> = ({ books, onLoadMore }) => {
             sx={{
                 maxHeight: "calc(100svh - 150px)",
                 overflowY: "auto",
+                scrollbarGutter: "stable",
             }}>
             <Grid2
                 container

@@ -42,6 +42,7 @@ const TableBook: React.FC<ExtendedBooksProps> = ({ books, onLoadMore }) => {
             sx={{
                 display: { xs: "none", md: "block" },
                 maxHeight: "calc(100svh - 150px)",
+                scrollbarGutter: "stable",
             }}>
             <Table
                 stickyHeader
