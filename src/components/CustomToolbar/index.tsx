@@ -25,6 +25,32 @@ const languages = [
     { value: "pt_BR", label: "Portuguese (Brazil)" },
 ];
 
+const marksLikes = [
+    {
+        value: 0,
+        label: "0",
+    },
+    {
+        value: 5,
+        label: "5",
+    },
+    {
+        value: 10,
+        label: "10",
+    },
+];
+
+const marksRating = [
+    {
+        value: 0,
+        label: "0",
+    },
+    {
+        value: 5,
+        label: "5",
+    },
+];
+
 const CustomToolbar: React.FC<CustomToolbarProps> = ({
     language,
     onLanguageChange,
@@ -91,6 +117,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
                     aria-labelledby="slider-label"
                     value={likes}
                     min={0}
+                    marks={marksLikes}
                     max={10}
                     step={0.1}
                     onChange={(_, newValue) =>
@@ -112,6 +139,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
                     value={rating}
                     min={0}
                     max={5}
+                    marks={marksRating}
                     step={0.1}
                     onChange={(_, newValue) =>
                         onRatingChange(newValue as number)
@@ -140,7 +168,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
                     display: { xs: "none", md: "flex" },
                     justifyContent: "space-between",
                     width: "100%",
-                    gap: 1,
+                    gap: 4,
                 }}>
                 {Filters}
                 <ToggleButtonGroup
