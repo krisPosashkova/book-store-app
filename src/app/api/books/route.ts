@@ -5,7 +5,12 @@ import {
     generateBook,
 } from "@/utils/server";
 import { Book } from "@/types/books.type";
-import { MAX_ATTEMPTS, DEFAULT_TOLERANCE } from "@/constants/constants";
+import {
+    MAX_ATTEMPTS,
+    TOLERANCE_STEP,
+    MAX_TOLERANCE,
+    BASE_TOLERANCE,
+} from "@/constants/constants";
 import { isBookMatchingCriteria } from "@/utils/server";
 import { ResponseType } from "@/types/api.type";
 import { MESSAGES } from "@/constants/messages";
@@ -37,6 +42,7 @@ export async function GET(request: NextRequest) {
         const matchingBooks: Book[] = [];
         let attempts = 0;
         let currentIndex = (page - 1) * pageSize;
+        let currentTolerance = BASE_TOLERANCE;
 
         while (matchingBooks.length < pageSize && attempts < MAX_ATTEMPTS) {
             const book = generateBook(currentIndex, config.faker);
@@ -46,10 +52,16 @@ export async function GET(request: NextRequest) {
                     book,
                     targetLikes,
                     targetRating,
-                    DEFAULT_TOLERANCE
+                    currentTolerance
                 )
             ) {
                 matchingBooks.push(book);
+            }
+            if (attempts % 20 === 0 && matchingBooks.length < pageSize / 2) {
+                currentTolerance = Math.min(
+                    currentTolerance + TOLERANCE_STEP,
+                    MAX_TOLERANCE
+                );
             }
 
             currentIndex++;
